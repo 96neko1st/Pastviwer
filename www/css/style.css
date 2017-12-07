@@ -1,3 +1,16 @@
+body{
+}
+
 #video{
     display: none;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+button#mapButton{
+    position: absolute;
+    top: 0px;
 }

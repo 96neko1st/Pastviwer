@@ -5,21 +5,30 @@ var video;
 //canvas変数
 var canvas;
 var context;
-//canvasのサイズ
-var width,height;
 //画像
-var image;
+var imgPanelFile = ["./img/panel_1.png","./img/panel_2.png"];
+var imgPanel;
 
+var position_x = [150,170];
+var position_y = [220,300];
+var radius = [60,80];
 
 $(document).ready(function(){
     initVideo();
+    $("#mapButton").click(function(){
+        window.location.href = "map.html"
+    });    
 });
-
 //ビデオの初期化
 function initVideo(){
+    // var number = sessionStorage.getItem("placeNumber");
+    // if (number == null) {
+    //     number = 0
+    // }
     //背景画像の読み込み
-    image = new Image();
-    image.src = "./img/panel_1.png";
+    imgPanel = new Image();
+    imgPanel.src = imgPanelFile[1];
+
     //videoの初期化
     video = document.getElementById("video");
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
@@ -35,13 +44,12 @@ function initVideo(){
     });
 }
 
+//canvasの初期化
 function initCanvas(){
-    width = $(document).width();
-    height = $(document).height();
     canvas = document.getElementById("dst");
     /*canvasのサイズをスマホサイズに調整*/
-    canvas.width = width
-    canvas.height = height;
+    canvas.width = $(document).width();
+    canvas.height = $(document).height();
     context = canvas.getContext("2d");
     /*反転処理*/
     context.translate(canvas.width,0);
@@ -50,14 +58,15 @@ function initCanvas(){
     setInterval(drawCanvas, 30);
 }
 
+//canvansに顔ハメパネルを描画する
 function drawCanvas(){
     /* 背景を画像を */
     context.beginPath();
-    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+    context.drawImage(imgPanel, 0, 0, canvas.width, canvas.height);
     
     /*顔を当てはめる場所を設定*/
     context.beginPath();
-    context.arc(150, 220, 70, 0, Math.PI * 2, false);
+    context.arc(position_x[1], position_y[1], radius[1], 0, Math.PI * 2, false);
     context.clip();
     /*写真を撮影*/
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
