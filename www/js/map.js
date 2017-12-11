@@ -11,10 +11,9 @@ var syncerWatch = {
 var placeLat = [34.252477, 34.253453];
 var placeLng = [132.906987, 132.904284];
 var placeImage = ["./img/icon/school.png", "./img/icon/tokyoskytree.png"];
-var showFlag = false;　//#map表示非表示切り替え
-var mapTimer;
+
 $(document).ready(function() {
-    mapTimer = setInterval(getGeolocation, 2000);
+    setInterval(getGeolocation, 1000);
 });
 //初期化してgoogle mapを表示する
 function initMap(_position) {

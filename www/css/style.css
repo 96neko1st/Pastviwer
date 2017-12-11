@@ -14,3 +14,9 @@ button#mapButton{
     position: absolute;
     top: 0px;
 }
+
+button#takeButton{
+    position: absolute;
+    top: 95%;
+    left: 50%;
+}
